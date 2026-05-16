@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مدونة مالك أحمد | لتطوير الأعمال والتقنية</title>
-    
+    <meta name="google-site-verification" content="48y3MOUFUWDob_pNQH5--8wyOmkg_oftv7tz-PIQt_M" />
     <meta name="description" content="مدونة مالك أحمد لتطوير الأعمال؛ وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة ونشر الحلول التقنية المبتكرة.">
     <link rel="canonical" href="https://malek227.github.io/">
     <meta property="og:title" content="مدونة مالك أحمد | لتطوير الأعمال والتقنية">
