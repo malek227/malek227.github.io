@@ -11,7 +11,7 @@
     <meta property="og:description" content="وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة.">
     <meta property="og:url" content="https://malek227.github.io/">
     <meta property="og:type" content="website">
-
+<meta name="google-site-verification" content="48y3MOUFUWDob_pNQH5--8wyOmkg_oftv7tz-PIQt_M" />
     <style>
         :root {
             --primary-color: #0056b3;
