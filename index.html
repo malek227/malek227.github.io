@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونة مالك أحمد | لتطوير الأعمال والتقنية</title>
+    <meta name="google-site-verification" content="48y3MOUFUWDob_pNQH5--8wyOmkg_oftv7tz-PIQt_M" />
+    <meta name="description" content="مدونة مالك أحمد لتطوير الأعمال؛ وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة ونشر الحلول التقنية المبتكرة.">
+    <link rel="canonical" href="https://malek227.github.io/">
+    <meta property="og:title" content="مدونة مالك أحمد | لتطوير الأعمال والتقنية">
+    <meta property="og:description" content="وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة.">
+    <meta property="og:url" content="https://malek227.github.io/">
+    <meta property="og:type" content="website">
+
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .btn-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>مرحباً بك في المنصة المطورة لـ مالك أحمد</h1>
+        <p>جاري تحضير الاتصال الآمن واستيراد البيانات التقنية وحلول تطوير الأعمال...</p>
+        <div class="loader"></div>
+        <p>إذا لم يتم تحويلك تلقائياً خلال ثوانٍ، <a class="btn-link" id="direct-link" href="https://malekahmed2.blogspot.com">اضغط هنا للانتقال المباشر</a>.</p>
+    </div>
+
+    <script>
+        // سكربت ذكي لقراءة الرابط الفرعي وتوجيه عناكب قوقل والزوار بدقة للمقال المناسب
+        (function() {
+            var bloggerDomain = "https://malekahmed2.blogspot.com";
+            var currentPath = window.location.pathname;
+            var currentSearch = window.location.search;
+            
+            // في حال وجود زائر قادم لمقال معين، يتم توجيهه للمقال نفسه في بلوجر دون خسارة الزيارة
+            if (currentPath && currentPath !== "/" && currentPath !== "/index.html") {
+                window.location.href = bloggerDomain + currentPath + currentSearch;
+            } else {
+                // التوجيه التلقائي للمصادر الرئيسية بعد ثانيتين لمنح العناكب فرصة قراءة السيو الخاص بجيت هاب
+                setTimeout(function() {
+                    window.location.href = bloggerDomain + currentSearch;
+                }, 2000);
+            }
+        })();
+    </script>
+</body>
+</html>
+
