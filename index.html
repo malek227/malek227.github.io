@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدونة مالك أحمد | لتطوير الأعمال والتقنية</title>
-    <meta name="google-site-verification" content="48y3MOUFUWDob_pNQH5--8wyOmkg_oftv7tz-PIQt_M" />
+    <title>مدونة مالك أحمد | قوة الأعمال والتقنية</title>
+    
+    <meta name="google-site-verification" content="48y3MOUFUWDob_pNQH5--8wyOmkg_oftv7tz-PiQt_M" />
+    
     <meta name="description" content="مدونة مالك أحمد لتطوير الأعمال؛ وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة ونشر الحلول التقنية المبتكرة.">
     <link rel="canonical" href="https://malek227.github.io/">
-    <meta property="og:title" content="مدونة مالك أحمد | لتطوير الأعمال والتقنية">
+    <meta property="og:title" content="مدونة مالك أحمد | قوة الأعمال والتقنية">
     <meta property="og:description" content="وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة.">
     <meta property="og:url" content="https://malek227.github.io/">
     <meta property="og:type" content="website">
@@ -26,7 +28,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            align-content: center;
+            align-items: center;
             justify-content: center;
             min-height: 100vh;
             text-align: center;
@@ -81,17 +83,14 @@
     </div>
 
     <script>
-        // سكربت ذكي لقراءة الرابط الفرعي وتوجيه عناكب قوقل والزوار بدقة للمقال المناسب
         (function() {
             var bloggerDomain = "https://malekahmed2.blogspot.com";
             var currentPath = window.location.pathname;
             var currentSearch = window.location.search;
             
-            // في حال وجود زائر قادم لمقال معين، يتم توجيهه للمقال نفسه في بلوجر دون خسارة الزيارة
             if (currentPath && currentPath !== "/" && currentPath !== "/index.html") {
                 window.location.href = bloggerDomain + currentPath + currentSearch;
             } else {
-                // التوجيه التلقائي للمصادر الرئيسية بعد ثانيتين لمنح العناكب فرصة قراءة السيو الخاص بجيت هاب
                 setTimeout(function() {
                     window.location.href = bloggerDomain + currentSearch;
                 }, 2000);
@@ -100,4 +99,3 @@
     </script>
 </body>
 </html>
-
