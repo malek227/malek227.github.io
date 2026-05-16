@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <meta name="google-site-verification" content="48y3MOUFUWDob_pNQH5--8wyOmkg_oftv7tz-PIQt_M" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مدونة مالك أحمد | لتطوير الأعمال والتقنية</title>
