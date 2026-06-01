@@ -3,60 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدونة مالك أحمد | قوة الأعمال والتقنية</title>
-    
-    <meta name="google-site-verification" content="48y3MOUFUWDob_pNQH5--8wyOmkg_oftv7tz-PiQt_M" />
-    
-    <meta name="description" content="مدونة مالك أحمد لتطوير الأعمال؛ وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة ونشر الحلول التقنية المبتكرة.">
-    <link rel="canonical" href="https://malek227.github.io/">
-    <meta property="og:title" content="مدونة مالك أحمد | قوة الأعمال والتقنية">
-    <meta property="og:description" content="وجهتك الاحترافية لتعلم استراتيجيات النمو، إدارة المشاريع، وفنون القيادة.">
-    <meta property="og:url" content="https://malek227.github.io/">
-    <meta property="og:type" content="website">
-
+    <title>تطوير الأعمال والتقنية</title>
     <style>
         :root {
-            --primary-color: #0056b3;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
+            --primary-color: #007bff;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: #f4f6f9;
+            color: #333;
+            font-family: 'Verdana', 'sans-serif', 'Arial';
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
+            padding: 20px;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px;
+            max-width: 800px;
+            margin: 20px auto;
             background: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         h1 {
-            color: var(--primary-color);
-            font-size: 24px;
+            color: #222;
+            font-size: 1.8rem;
             margin-bottom: 10px;
         }
         p {
-            font-size: 16px;
+            color: #555;
             line-height: 1.6;
-            color: #666;
         }
+        
+        /* تنسيق شبكة المنشورات */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .post-card {
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+        }
+        .post-title {
+            color: #333333;
+            font-size: 1.3rem;
+            margin: 0 0 10px 0;
+        }
+        .post-meta {
+            color: #999999;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+        .post-excerpt {
+            color: #666666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .btn-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .loading {
+            color: #666666;
+            font-style: italic;
+        }
+
+        /* لودر التحميل المؤقت */
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid var(--primary-color);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
@@ -64,38 +93,75 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .btn-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>مرحباً بك في المنصة المطورة لـ مالك أحمد</h1>
-        <p>جاري تحضير الاتصال الآمن واستيراد البيانات التقنية وحلول تطوير الأعمال...</p>
-        <div class="loader"></div>
-        <p>إذا لم يتم تحويلك تلقائياً خلال ثوانٍ، <a class="btn-link" id="direct-link" href="https://malekahmed2.blogspot.com">اضغط هنا للانتقال المباشر</a>.</p>
-    </div>
+<div class="container">
+    <h1>مرحباً بك في منصة تطوير الأعمال والتقنية</h1>
+    <p>تابع أحدث المقالات والإستراتيجيات لتطوير المشاريع والحلول البرمجية الفعالة.</p>
+    
+    <!-- لودر يظهر حتى يتم تحميل المقالات من الـ JSON -->
+    <div id="loader" class="loader"></div>
+    
+    <!-- حاوية عرض منشورات المدونة ديناميكياً -->
+    <div id="posts-container" class="posts-grid" style="display: none;"></div>
+</div>
 
-    <script>
-        (function() {
-            var bloggerDomain = "https://malekahmed2.blogspot.com";
-            var currentPath = window.location.pathname;
-            var currentSearch = window.location.search;
-            
-            if (currentPath && currentPath !== "/" && currentPath !== "/index.html") {
-                window.location.href = bloggerDomain + currentPath + currentSearch;
-            } else {
-                setTimeout(function() {
-                    window.location.href = bloggerDomain + currentSearch;
-                }, 2000);
-            }
-        })();
-    </script>
+<script>
+    // سكريبت جلب وقراءة ملف الـ JSON وعرضه داخل الصفحة
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.getElementById('posts-container');
+        const loader = document.getElementById('loader');
+        
+        fetch('posts.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("لم نتمكن من جلب ملف المنشورات");
+                }
+                return response.json();
+            })
+            .then(posts => {
+                // إخفاء اللودر وإظهار الحاوية
+                loader.style.display = 'none';
+                container.style.display = 'grid';
+                
+                if(posts.length === 0) {
+                    container.innerHTML = '<p>لا توجد منشورات متاحة حالياً.</p>';
+                    return;
+                }
+
+                // بناء المنشورات تلقائياً
+                posts.forEach(post => {
+                    const postCard = document.createElement('article');
+                    postCard.className = 'post-card';
+                    
+                    postCard.innerHTML = `
+                        <h2 class="post-title">${post.title}</h2>
+                        <div class="post-meta">تم النشر في: ${post.date}</div>
+                        <p class="post-excerpt">${post.excerpt}</p>
+                        <a href="${post.link}" class="btn-link">اقرأ المزيد ←</a>
+                    `;
+                    
+                    container.appendChild(postCard);
+                });
+            })
+            .catch(error => {
+                console.error('خطأ:', error);
+                loader.style.display = 'none';
+                container.style.display = 'block';
+                container.innerHTML = '<p style="color: red; text-align:center;">عذراً، حدث خطأ أثناء تحميل المنشورات المتوفرة.</p>';
+            });
+    });
+
+    // سكريبت ذكي إضافي لتوجيه عناكب الفهرسة والزوار بدقة
+    // (يمكنك تركه مفعلاً إذا كنت تعتمد على توجيه برمي مخصص لصفحاتك)
+    /*
+    (function() {
+        // أي كود توجيه مخصص ترغب في إضافته مستقبلاً
+    })();
+    */
+</script>
+
 </body>
 </html>
