@@ -6,34 +6,48 @@
     <title>تطوير الأعمال والتقنية</title>
     <style>
         :root {
-            --primary-color: #007bff;
+            --primary-color: #0056b3;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
         }
         body {
-            background-color: #f4f6f9;
-            color: #333;
-            font-family: 'Verdana', 'sans-serif', 'Arial';
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 30px;
         }
         .container {
             max-width: 800px;
-            margin: 20px auto;
+            margin: 0 auto;
             background: #ffffff;
             border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         h1 {
-            color: #222;
-            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-size: 24px;
             margin-bottom: 10px;
         }
         p {
-            color: #555;
+            font-size: 16px;
             line-height: 1.6;
+            color: #666;
         }
-        
-        /* تنسيق شبكة المنشورات */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -45,122 +59,96 @@
             border: 1px solid #eeeeee;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease;
         }
         .post-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
         }
         .post-title {
-            color: #333333;
-            font-size: 1.3rem;
+            color: #222;
+            font-size: 1.2rem;
             margin: 0 0 10px 0;
         }
-        .post-meta {
-            color: #999999;
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-        }
         .post-excerpt {
-            color: #666666;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
         .btn-link {
             display: inline-block;
+            margin-top: 15px;
             color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
-        }
-        .loading {
-            color: #666666;
-            font-style: italic;
-        }
-
-        /* لودر التحميل المؤقت */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>مرحباً بك في منصة تطوير الأعمال والتقنية</h1>
-    <p>تابع أحدث المقالات والإستراتيجيات لتطوير المشاريع والحلول البرمجية الفعالة.</p>
+    <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
+    <div id="status-text">
+        <p>جاري تحضير الاتصال الآمن واستيراد البيانات التقنية وحلول تطوير الأعمال...</p>
+    </div>
     
-    <!-- لودر يظهر حتى يتم تحميل المقالات من الـ JSON -->
     <div id="loader" class="loader"></div>
-    
-    <!-- حاوية عرض منشورات المدونة ديناميكياً -->
     <div id="posts-container" class="posts-grid" style="display: none;"></div>
 </div>
 
 <script>
-    // سكريبت جلب وقراءة ملف الـ JSON وعرضه داخل الصفحة
-    document.addEventListener("DOMContentLoaded", function() {
-        const container = document.getElementById('posts-container');
-        const loader = document.getElementById('loader');
-        
-        fetch('posts.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("لم نتمكن من جلب ملف المنشورات");
-                }
-                return response.json();
-            })
-            .then(posts => {
-                // إخفاء اللودر وإظهار الحاوية
-                loader.style.display = 'none';
-                container.style.display = 'grid';
-                
-                if(posts.length === 0) {
-                    container.innerHTML = '<p>لا توجد منشورات متاحة حالياً.</p>';
-                    return;
-                }
-
-                // بناء المنشورات تلقائياً
-                posts.forEach(post => {
-                    const postCard = document.createElement('article');
-                    postCard.className = 'post-card';
-                    
-                    postCard.innerHTML = `
-                        <h2 class="post-title">${post.title}</h2>
-                        <div class="post-meta">تم النشر في: ${post.date}</div>
-                        <p class="post-excerpt">${post.excerpt}</p>
-                        <a href="${post.link}" class="btn-link">اقرأ المزيد ←</a>
-                    `;
-                    
-                    container.appendChild(postCard);
-                });
-            })
-            .catch(error => {
-                console.error('خطأ:', error);
-                loader.style.display = 'none';
-                container.style.display = 'block';
-                container.innerHTML = '<p style="color: red; text-align:center;">عذراً، حدث خطأ أثناء تحميل المنشورات المتوفرة.</p>';
-            });
-    });
-
-    // سكريبت ذكي إضافي لتوجيه عناكب الفهرسة والزوار بدقة
-    // (يمكنك تركه مفعلاً إذا كنت تعتمد على توجيه برمي مخصص لصفحاتك)
-    /*
     (function() {
-        // أي كود توجيه مخصص ترغب في إضافته مستقبلاً
+        var bloggerDomain = "https://malekahmed2.blogspot.com";
+        var currentPath = window.location.pathname;
+        var currentSearch = window.location.search;
+
+        // 1. إذا كان الزائر يطلب مقالاً قديماً محدداً (وليس الصفحة الرئيسية)، يتم توجيهه فوراً لبلوجر دون خسارة الزيارة
+        if (currentPath && currentPath !== "/" && currentPath !== "/index.html") {
+            window.location.href = bloggerDomain + currentPath + currentSearch;
+            return;
+        }
+
+        // 2. إذا كان الزائر في الصفحة الرئيسية، يتم إلغاء التوجيه الفوري، وقراءة المنشورات ديناميكياً من ملف JSON الخاص بك
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById('posts-container');
+            const loader = document.getElementById('loader');
+            const statusText = document.getElementById('status-text');
+
+            fetch('posts.json')
+                .then(response => {
+                    if (!response.ok) throw new Error("تعذر جلب ملف JSON");
+                    return response.json();
+                })
+                .then(posts => {
+                    loader.style.display = 'none';
+                    container.style.display = 'grid';
+                    statusText.innerHTML = '<p>تابع أحدث المقالات والإستراتيجيات الحصرية:</p>';
+
+                    if(posts.length === 0) {
+                        container.innerHTML = '<p>لا توجد منشورات متوفرة حالياً.</p>';
+                        return;
+                    }
+
+                    posts.forEach(post => {
+                        const postCard = document.createElement('article');
+                        postCard.className = 'post-card';
+                        postCard.innerHTML = `
+                            <h3 class="post-title">${post.title}</h3>
+                            <p class="post-excerpt">${post.excerpt}</p>
+                            <a href="${post.link}" class="btn-link">اقرأ المزيد ←</a>
+                        `;
+                        container.appendChild(postCard);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    // في حال فشل جلب الـ JSON، نترك فرصة ثانية للتوجيه الافتراضي كخيار احتياطي بعد ثانيتين لضمان عمل الموقع
+                    setTimeout(function() {
+                        window.location.href = bloggerDomain + currentSearch;
+                    }, 2000);
+                });
+        });
     })();
-    */
 </script>
 
 </body>
