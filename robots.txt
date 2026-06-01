@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# رابط خريطة الموقع لمساعدة العناكب على الاكتشاف السريع
+Sitemap: https://malek227.github.io/sitemap.xml
+
