@@ -61,6 +61,9 @@
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .post-card:hover {
             transform: translateY(-5px);
@@ -69,18 +72,20 @@
             color: #222;
             font-size: 1.2rem;
             margin: 0 0 10px 0;
+            line-height: 1.4;
         }
         .post-excerpt {
             color: #555;
             font-size: 0.9rem;
             line-height: 1.5;
+            margin-bottom: 15px;
         }
         .btn-link {
             display: inline-block;
-            margin-top: 15px;
             color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
+            margin-top: auto;
         }
     </style>
 </head>
@@ -89,7 +94,7 @@
 <div class="container">
     <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
     <div id="status-text">
-        <p>جاري تحضير الاتصال الآمن واستيراد البيانات التقنية وحلول تطوير الأعمال...</p>
+        <p>جاري استيراد أحدث المقالات والمواضيع الحصرية مباشرة من المدونة...</p>
     </div>
     
     <div id="loader" class="loader"></div>
@@ -102,50 +107,77 @@
         var currentPath = window.location.pathname;
         var currentSearch = window.location.search;
 
-        // 1. إذا كان الزائر يطلب مقالاً قديماً محدداً (وليس الصفحة الرئيسية)، يتم توجيهه فوراً لبلوجر دون خسارة الزيارة
+        // 1. التوجيه الذكي: إذا كان الزائر يطلب رابط مقال قديم قادم من محرك البحث، يتم توجيهه لبلوجر فوراً لضمان عدم خسارة الزيارة
         if (currentPath && currentPath !== "/" && currentPath !== "/index.html") {
             window.location.href = bloggerDomain + currentPath + currentSearch;
             return;
         }
 
-        // 2. إذا كان الزائر في الصفحة الرئيسية، يتم إلغاء التوجيه الفوري، وقراءة المنشورات ديناميكياً من ملف JSON الخاص بك
+        // 2. إذا كان الزائر في الصفحة الرئيسية، نقوم بجلب خلاصة المقالات ديناميكياً من بلوجر وعرضها هنا
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.getElementById('posts-container');
             const loader = document.getElementById('loader');
             const statusText = document.getElementById('status-text');
 
-            fetch('posts.json')
+            // رابط جلب الخلاصة من بلوجر بصيغة JSON متوافقة
+            const feedUrl = `${bloggerDomain}/feeds/posts/default?alt=json&max-results=6`;
+
+            fetch(feedUrl)
                 .then(response => {
-                    if (!response.ok) throw new Error("تعذر جلب ملف JSON");
+                    if (!response.ok) throw new Error("تعذر الاتصال بخلاصة بلوجر");
                     return response.json();
                 })
-                .then(posts => {
+                .then(data => {
                     loader.style.display = 'none';
                     container.style.display = 'grid';
-                    statusText.innerHTML = '<p>تابع أحدث المقالات والإستراتيجيات الحصرية:</p>';
+                    statusText.innerHTML = '<p>تابع أحدث الاستراتيجيات والمقالات التقنية المزامنة تلقائياً:</p>';
 
-                    if(posts.length === 0) {
-                        container.innerHTML = '<p>لا توجد منشورات متوفرة حالياً.</p>';
+                    const entries = data.feed.entry;
+                    if (!entries || entries.length === 0) {
+                        container.innerHTML = '<p>لا توجد منشورات متوفرة في المدونة حالياً.</p>';
                         return;
                     }
 
-                    posts.forEach(post => {
+                    entries.forEach(entry => {
+                        // جلب عنوان المقال
+                        const title = entry.title.$t;
+                        
+                        // جلب رابط المقال الأصلي على بلوجر
+                        let link = "";
+                        for (let i = 0; i < entry.link.length; i++) {
+                            if (entry.link[i].rel === 'alternate') {
+                                link = entry.link[i].href;
+                                break;
+                            }
+                        }
+
+                        // جلب مقتطف أو نبذة قصيرة من نص المقال وتنظيفه من أكواد HTML
+                        let summary = "";
+                        if (entry.summary && entry.summary.$t) {
+                            summary = entry.summary.$t;
+                        } else if (entry.content && entry.content.$t) {
+                            summary = entry.content.$t;
+                        }
+                        // تنظيف النص ليظهر مقتطف نظيف بحد أقصى 120 حرف
+                        summary = summary.replace(/<[^>]*>/g, "").substring(0, 120) + "...";
+
+                        // إنشاء كارت المقال وضبطه
                         const postCard = document.createElement('article');
                         postCard.className = 'post-card';
                         postCard.innerHTML = `
-                            <h3 class="post-title">${post.title}</h3>
-                            <p class="post-excerpt">${post.excerpt}</p>
-                            <a href="${post.link}" class="btn-link">اقرأ المزيد ←</a>
+                            <h3 class="post-title">${title}</h3>
+                            <p class="post-excerpt">${summary}</p>
+                            <a href="${link}" target="_blank" class="btn-link">اقرأ المقال بالكامل ←</a>
                         `;
                         container.appendChild(postCard);
                     });
                 })
                 .catch(error => {
-                    console.error(error);
-                    // في حال فشل جلب الـ JSON، نترك فرصة ثانية للتوجيه الافتراضي كخيار احتياطي بعد ثانيتين لضمان عمل الموقع
-                    setTimeout(function() {
-                        window.location.href = bloggerDomain + currentSearch;
-                    }, 2000);
+                    console.error("خطأ أثناء جلب المقالات:", error);
+                    loader.style.display = 'none';
+                    statusText.innerHTML = '<p style="color: red;">تعذر جلب المقالات تلقائياً، يمكنك الانتقال للمدونة مباشرة.</p>';
+                    container.style.display = 'block';
+                    container.innerHTML = `<a href="${bloggerDomain}" class="btn-link" style="font-size: 18px;">اضغط هنا للانتقال إلى مدونة بلوجر الرئيسية</a>`;
                 });
         });
     })();
