@@ -25,7 +25,7 @@
             padding: 0;
         }
         
-        /* 🌐 تصميم القائمة العلوية */
+        /* 🌐 تصميم القائمة العلوية المرن والمحدث لحل التداخل */
         .navbar {
             background-color: var(--card-bg);
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -36,11 +36,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-wrap: wrap; /* يسمح بالعناصر بالنزول لسطر جديد عند الحاجة */
+            gap: 15px;
         }
         .nav-logo {
             text-decoration: none;
@@ -76,7 +73,14 @@
         }
         .logo-subtitle { font-size: 0.72rem; color: #868e96; font-weight: 600; margin-top: 2px; }
 
-        .search-box { position: relative; max-width: 250px; width: 100%; }
+        /* تعديل احترافي لقسم البحث والزر لمنع التداخل نهائياً */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .search-box { position: relative; width: 220px; }
         .search-box input {
             width: 100%;
             padding: 10px 35px 10px 15px;
@@ -84,9 +88,11 @@
             border-radius: 20px;
             font-family: inherit;
             outline: none;
+            box-sizing: border-box;
+            font-size: 0.85rem;
         }
         .search-box::after {
-            content: "🔍"; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.6;
+            content: "🔍"; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); font-size: 0.85rem; opacity: 0.6;
         }
 
         .nav-blog-link {
@@ -95,14 +101,39 @@
             text-decoration: none;
             padding: 9px 18px;
             border-radius: 20px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 600;
+            white-space: nowrap; /* يمنع النص من الانقسام لسطرين */
             box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
             transition: all 0.3s ease;
+            text-align: center;
         }
         .nav-blog-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0, 86, 179, 0.3);
+        }
+
+        /* 📱 شاشات الموبايل (Responsive Media Queries) لضبط الأبعاد التلقائي */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 15px;
+                justify-content: center; /* توسيط الشعار في الموبايل */
+                flex-direction: column;  /* جعل العناصر تحت بعضها بشكل منظم */
+                gap: 12px;
+            }
+            .nav-left {
+                width: 100%;
+                justify-content: center; /* توسيط البحث والزر */
+                gap: 10px;
+            }
+            .search-box {
+                width: 100%; /* جعل شريط البحث يأخذ المساحة المتاحة بالتساوي */
+                max-width: 280px;
+            }
+            .nav-blog-link {
+                width: 100%;
+                max-width: 280px;
+            }
         }
 
         /* 📣 تصميم شريط الأخبار المتحرك */
@@ -167,6 +198,9 @@
             padding: 35px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
+        @media (max-width: 600px) {
+            .container { padding: 20px 15px; }
+        }
         
         /* 📦 تصميم الصناديق الجانبية */
         .sidebar {
@@ -182,7 +216,7 @@
             border: 1px solid #eef0f4;
         }
         
-        /* ✨ صندوق هوية المدونة والتعريف المضاف حديثاً */
+        /* صندوق هوية المدونة والتعريف */
         .widget-profile {
             text-align: center;
             background: var(--card-bg);
@@ -308,7 +342,7 @@
         .toc-list a:hover { color: var(--primary-color); text-decoration: underline; }
 
         /* محتوى المقال الداخلي */
-        .single-post-body { font-size: 1.15rem; line-height: 1.9; color: #33; }
+        .single-post-body { font-size: 1.15rem; line-height: 1.9; color: #333; }
         .single-post-body p { margin-bottom: 25px; }
         .single-post-body h2, .single-post-body h3 { color: var(--primary-color); margin-top: 35px; margin-bottom: 15px; font-weight: 600; scroll-margin-top: 90px; }
         .single-post-body h2 { font-size: 1.5rem; border-right: 4px solid var(--primary-color); padding-right: 12px; }
@@ -320,7 +354,7 @@
 </head>
 <body>
 
-<!-- 🌐 القائمة العلوية -->
+<!-- 🌐 القائمة العلوية المصححة المتجاوبة -->
 <nav class="navbar">
     <div class="nav-logo" onclick="showMainView()">
         <div class="logo-icon">📊</div>
@@ -346,7 +380,7 @@
 <!-- 🗂️ التقسيم الهيكلي للموقع -->
 <div class="main-layout">
     
-    <!-- القسم الأيمن: الواجهة الرئيسية للمقالات أو قراءة مقال مفرد -->
+    <!-- القسم الأيمن -->
     <main>
         <div id="main-blog-view" class="container">
             <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
@@ -370,9 +404,9 @@
         </div>
     </main>
 
-    <!-- القسم الأيسر: الصناديق الجانبية -->
+    <!-- القسم الأيسر -->
     <aside id="sidebar-view" class="sidebar">
-        <!-- ✨ صندوق هوية المدونة والتعريف الجديد بالكامل -->
+        <!-- صندوق الهوية والتعريف -->
         <div class="widget widget-profile">
             <div class="profile-logo-wrapper">📊</div>
             <h2 class="profile-name">تطوير الأعمال والتقنية</h2>
@@ -380,7 +414,7 @@
             <p class="profile-desc">منصة متكاملة متخصصة في تقديم أحدث المقالات التقنية، حلول تطوير المشاريع، الإستراتيجيات الإدارية، وأنظمة FinTech المتطورة.</p>
         </div>
 
-        <!-- بطاقة التوجيه والترحيب للمدونة الرئيسية -->
+        <!-- بطاقة التوجيه والترحيب -->
         <div class="widget widget-promo">
             <h3 class="widget-title" style="border-bottom:none; margin-bottom:10px; justify-content:center;">📢 تابعنا هناك</h3>
             <p>للمزيد من الشروحات الحصرية والتفاعل المباشر مع المقالات الجديدة والمميزة:</p>
