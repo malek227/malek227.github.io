@@ -25,7 +25,7 @@
             padding: 0;
         }
         
-        /* 🌐 تصميم القائمة العلوية الاحترافية */
+        /* 🌐 تصميم القائمة العلوية */
         .navbar {
             background-color: var(--card-bg);
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -37,8 +37,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        
-        /* 🎨 تصميم الشعار المطور والذكي كلياً */
         .nav-logo {
             text-decoration: none;
             display: flex;
@@ -61,294 +59,180 @@
             box-shadow: 0 4px 10px rgba(0, 86, 179, 0.25);
             transition: transform 0.3s ease;
         }
-        .nav-logo:hover .logo-icon {
-            transform: rotate(-8deg) scale(1.05);
-        }
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
+        .nav-logo:hover .logo-icon { transform: rotate(-8deg) scale(1.05); }
+        .logo-text { display: flex; flex-direction: column; }
         .logo-title {
             font-size: 1.35rem;
             font-weight: 800;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
             line-height: 1.2;
         }
-        .logo-subtitle {
-            font-size: 0.72rem;
-            color: #868e96;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-        }
+        .logo-subtitle { font-size: 0.72rem; color: #868e96; font-weight: 600; margin-top: 2px; }
 
-        .search-box {
-            position: relative;
-            max-width: 300px;
-            width: 100%;
-        }
+        .search-box { position: relative; max-width: 300px; width: 100%; }
         .search-box input {
             width: 100%;
             padding: 10px 35px 10px 15px;
             border: 1px solid #e2e8f0;
             border-radius: 20px;
             font-family: inherit;
-            font-size: 0.9rem;
             outline: none;
-            transition: border-color 0.2s;
-        }
-        .search-box input:focus {
-            border-color: var(--primary-color);
         }
         .search-box::after {
-            content: "🔍";
-            position: absolute;
-            top: 50%;
-            right: 12px;
-            transform: translateY(-50%);
+            content: "🔍"; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.6;
+        }
+
+        /* 📣 تصميم شريط الأخبار المتحرك */
+        .ticker-wrap {
+            background-color: #1a1d20;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            height: 40px;
             font-size: 0.9rem;
-            opacity: 0.6;
+        }
+        .ticker-title {
+            background: var(--primary-gradient);
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            white-space: nowrap;
+            z-index: 2;
+            box-shadow: 3px 0 10px rgba(0,0,0,0.3);
+        }
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 25s linear infinite;
+        }
+        .ticker-content:hover { animation-play-state: paused; }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 25px;
+            color: #e2e8f0;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .ticker-item:hover { color: #00c6ff; text-decoration: underline; }
+        
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(100%, 0, 0); }
+        }
+
+        /* 🗂️ توزيع مساحة الصفحة (شاشة رئيسية + جانبي) */
+        .main-layout {
+            max-width: 1150px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
         }
 
         .container {
-            max-width: 950px;
-            margin: 30px auto;
             background: var(--card-bg);
             border-radius: 14px;
-            padding: 40px;
+            padding: 35px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
         
-        /* 🏷️ شريط الأقسام والتصنيفات الأنيق */
-        .categories-bar {
+        /* 📦 تصميم صندوق "أحدث المقالات" الجانبي */
+        .sidebar {
             display: flex;
-            gap: 10px;
-            margin-top: 25px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-        .category-btn {
-            background-color: #f1f3f5;
-            color: #495057;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .category-btn:hover, .category-btn.active {
-            background-color: var(--primary-color);
-            color: #ffffff;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-size: 26px;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-        p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #555962;
-        }
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            flex-direction: column;
             gap: 25px;
-            margin-top: 35px;
         }
-        .post-card {
+        .widget {
             background: var(--card-bg);
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
             border: 1px solid #eef0f4;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
         }
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-        .post-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background-color: #eaeff5;
-        }
-        .post-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .post-title {
-            color: #1a1d20;
-            font-size: 1.25rem;
-            margin: 0 0 12px 0;
-            line-height: 1.4;
-            font-weight: 600;
-        }
-        .post-excerpt {
-            color: #6c757d;
-            font-size: 0.92rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-        .btn-link {
-            display: inline-block;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: auto;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-        
-        /* 🎨 تنسيقات واجهة المقال الكامل */
-        .single-post-view {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-        .single-post-title {
-            color: #111;
-            font-size: 2.2rem;
-            line-height: 1.4;
-            margin: 20px 0 10px 0;
-            font-weight: 700;
-        }
-        .single-post-meta {
-            color: #868e96;
-            font-size: 0.92rem;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #f1f3f5;
-            padding-bottom: 15px;
-        }
-        
-        /* 📋 تنسيق الفهرس التلقائي */
-        .post-toc {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-right: 4px solid var(--primary-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .toc-title {
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #333;
+        .widget-title {
             font-size: 1.1rem;
-        }
-        .toc-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .toc-list li {
-            margin-bottom: 8px;
-        }
-        .toc-list a {
-            color: #495057;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.2s;
-        }
-        .toc-list a:hover {
+            font-weight: 700;
             color: var(--primary-color);
-            text-decoration: underline;
-        }
-        .toc-depth-h3 {
-            padding-right: 20px;
-            font-size: 0.95rem;
-        }
-
-        /* تنسيق محتوى المقال الداخلي */
-        .single-post-body {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            color: #333333;
-        }
-        .single-post-body p {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            margin-bottom: 25px;
-        }
-        .single-post-body h2, .single-post-body h3 {
-            color: var(--primary-color);
-            margin-top: 35px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            scroll-margin-top: 90px;
-        }
-        .single-post-body h2 { font-size: 1.6rem; border-right: 4px solid var(--primary-color); padding-right: 12px; }
-        
-        .single-post-body img {
-            max-width: 100% !important;
-            height: auto !important;
-            border-radius: 10px;
-            margin: 25px auto;
-            display: block;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .single-post-body table {
-            width: 100%;
-            margin: 30px 0;
-            border-collapse: collapse;
-            font-size: 1rem;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .single-post-body th, .single-post-body td {
-            padding: 12px 15px;
-            text-align: right;
-            border-bottom: 1px solid #eef1f6;
-        }
-        .single-post-body th { background-color: var(--primary-color); color: #ffffff; }
-        .single-post-body tr:nth-child(even) { background-color: #fcfdfe; }
-        .single-post-body blockquote {
-            background-color: var(--secondary-color);
-            border-right: 5px solid var(--primary-color);
-            padding: 15px 20px;
-            margin: 25px 0;
-            border-radius: 4px;
-        }
-        
-        .back-button {
-            display: inline-flex;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f3f5;
+            display: flex;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 10px 18px;
-            background-color: #f1f3f5;
-            color: #495057;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
+            gap: 8px;
+        }
+        .recent-posts-list { display: flex; flex-direction: column; gap: 15px; }
+        .recent-item {
+            display: flex;
+            gap: 12px;
             cursor: pointer;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #e9ecef;
         }
-        .back-button:hover { background-color: #e9ecef; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .recent-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .recent-thumb { width: 65px; height: 50px; border-radius: 6px; object-fit: cover; background: #eaeff5; }
+        .recent-info { display: flex; flex-direction: column; justify-content: center; }
+        .recent-title { font-size: 0.9rem; font-weight: 600; line-height: 1.4; color: #2b303a; transition: color 0.2s; }
+        .recent-item:hover .recent-title { color: var(--primary-color); }
+
+        /* 🏷️ شريط التصنيفات والأقسام */
+        .categories-bar { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+        .category-btn {
+            background-color: #f1f3f5; color: #495057; border: none; padding: 6px 14px; border-radius: 20px;
+            cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.2s;
         }
+        .category-btn:hover, .category-btn.active { background-color: var(--primary-color); color: #ffffff; }
+
+        .posts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 30px; }
+        .post-card {
+            background: var(--card-bg); border: 1px solid #eef0f4; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column;
+        }
+        .post-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .post-image { width: 100%; height: 160px; object-fit: cover; }
+        .post-content { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; }
+        .post-title { color: #1a1d20; font-size: 1.15rem; margin: 0 0 10px 0; line-height: 1.4; font-weight: 600; }
+        .post-excerpt { color: #6c757d; font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; flex-grow: 1; }
+        .btn-link { color: var(--primary-color); text-decoration: none; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+        
+        /* 🎨 واجهة المقال الكامل */
+        .single-post-view { display: none; animation: fadeIn 0.4s ease-in-out; background: var(--card-bg); border-radius: 14px; padding: 35px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+        .single-post-title { color: #111; font-size: 2rem; line-height: 1.4; margin: 20px 0 10px 0; font-weight: 700; }
+        .single-post-meta { color: #868e96; font-size: 0.9rem; margin-bottom: 25px; border-bottom: 2px solid #f1f3f5; padding-bottom: 15px; }
+        
+        /* 📋 الفهرس التلقائي */
+        .post-toc { background-color: #f8f9fa; border: 1px solid #e9ecef; border-right: 4px solid var(--primary-color); border-radius: 8px; padding: 20px; margin-bottom: 30px; }
+        .toc-title { font-weight: 700; margin: 0 0 10px 0; color: #333; }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list li { margin-bottom: 8px; }
+        .toc-list a { color: #495057; text-decoration: none; transition: color 0.2s; }
+        .toc-list a:hover { color: var(--primary-color); text-decoration: underline; }
+
+        /* محتوى المقال الداخلي */
+        .single-post-body { font-size: 1.15rem; line-height: 1.9; color: #333; }
+        .single-post-body p { margin-bottom: 25px; }
+        .single-post-body h2, .single-post-body h3 { color: var(--primary-color); margin-top: 35px; margin-bottom: 15px; font-weight: 600; scroll-margin-top: 90px; }
+        .single-post-body h2 { font-size: 1.5rem; border-right: 4px solid var(--primary-color); padding-right: 12px; }
+        .single-post-body img { max-width: 100% !important; height: auto !important; border-radius: 10px; margin: 25px auto; display: block; }
+        
+        .back-button { display: inline-flex; align-items: center; margin-bottom: 25px; padding: 10px 18px; background-color: #f1f3f5; color: #495057; text-decoration: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<!-- 🌐 القائمة العلوية المحدثة بالشعار الاحترافي الجديد -->
+<!-- 🌐 القائمة العلوية -->
 <nav class="navbar">
     <div class="nav-logo" onclick="showMainView()">
         <div class="logo-icon">📊</div>
@@ -362,33 +246,47 @@
     </div>
 </nav>
 
-<div class="container">
-    <!-- واجهة القائمة الرئيسية للمقالات -->
-    <div id="main-blog-view">
-        <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
-        <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالكامل من المدونة:</p>
-        
-        <!-- 🏷️ شريط التصنيفات والأقسام التلقائي -->
-        <div id="categories-container" class="categories-bar"></div>
+<!-- 📣 شريط الأخبار المتحرك المضاف حديثاً -->
+<div class="ticker-wrap">
+    <div class="ticker-title">🔥 آخر التحديثات:</div>
+    <div id="ticker-container" class="ticker-content"></div>
+</div>
 
-        <!-- حاوية عرض المنشورات -->
-        <div id="posts-container" class="posts-grid"></div>
-    </div>
-
-    <!-- واجهة قراءة المقال المفرد (مخفية افتراضياً) -->
-    <div id="single-post-view" class="single-post-view">
-        <span class="back-button" onclick="showMainView()">→ العودة لقائمة المقالات</span>
-        <h1 id="article-title" class="single-post-title"></h1>
-        <div id="article-meta" class="single-post-meta"></div>
-        
-        <!-- صندوق الفهرس التلقائي للمقال -->
-        <div id="article-toc" class="post-toc" style="display: none;">
-            <p class="toc-title">محتويات المقال (فهرس سريع):</p>
-            <ul id="toc-list" class="toc-list"></ul>
+<!-- 🗂️ التقسيم الهيكلي الجديد للموقع -->
+<div class="main-layout">
+    
+    <!-- القسم الأيمن: الواجهة الرئيسية للمقالات أو قراءة مقال مفرد -->
+    <main>
+        <div id="main-blog-view" class="container">
+            <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
+            <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالكامل من المدونة:</p>
+            
+            <div id="categories-container" class="categories-bar"></div>
+            <div id="posts-container" class="posts-grid"></div>
         </div>
 
-        <div id="article-body" class="single-post-body"></div>
-    </div>
+        <div id="single-post-view" class="single-post-view">
+            <span class="back-button" onclick="showMainView()">→ العودة لقائمة المقالات</span>
+            <h1 id="article-title" class="single-post-title"></h1>
+            <div id="article-meta" class="single-post-meta"></div>
+            
+            <div id="article-toc" class="post-toc" style="display: none;">
+                <p class="toc-title">محتويات المقال (فهرس سريع):</p>
+                <ul id="toc-list" class="toc-list"></ul>
+            </div>
+
+            <div id="article-body" class="single-post-body"></div>
+        </div>
+    </main>
+
+    <!-- القسم الأيسر: الصناديق الجانبية (أحدث المقالات) -->
+    <aside id="sidebar-view" class="sidebar">
+        <div class="widget">
+            <h3 class="widget-title">📌 أحدث المقالات</h3>
+            <div id="recent-posts-container" class="recent-posts-list"></div>
+        </div>
+    </aside>
+
 </div>
 
 <script>
@@ -403,8 +301,55 @@
         }
 
         blogEntries = data.feed.entry;
+        
+        // تشغيل العناصر المضافة حديثاً
+        generateTicker();
+        generateRecentPostsWidget();
+        
         generateCategories();
         renderPosts();
+    }
+
+    // 📣 بناء شريط الأخبار التلقائي (آخر 5 مقالات)
+    function generateTicker() {
+        const tickerContainer = document.getElementById('ticker-container');
+        let tickerHtml = '';
+        const limit = Math.min(blogEntries.length, 5);
+        
+        for (let i = 0; i < limit; i++) {
+            tickerHtml += `<span class="ticker-item" onclick="readFullPost(${i})">◀ ${blogEntries[i].title.$t}</span>`;
+        }
+        tickerContainer.innerHTML = tickerHtml;
+    }
+
+    // 📌 بناء صندوق "أحدث المقالات" الجانبي بالتصاوير المصغرة
+    function generateRecentPostsWidget() {
+        const recentContainer = document.getElementById('recent-posts-container');
+        let recentHtml = '';
+        const limit = Math.min(blogEntries.length, 5);
+        
+        for (let i = 0; i < limit; i++) {
+            const entry = blogEntries[i];
+            
+            let imageUrl = "";
+            if (entry.media$thumbnail) {
+                imageUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w150-h150-c/');
+            } else if (entry.content && entry.content.$t) {
+                const match = entry.content.$t.match(/<img[^>]+src="([^">]+)"/);
+                if (match) imageUrl = match[1];
+            }
+            if (!imageUrl) imageUrl = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&auto=format&fit=crop&q=60";
+
+            recentHtml += `
+                <div class="recent-item" onclick="readFullPost(${i})">
+                    <img src="${imageUrl}" alt="${entry.title.$t}" class="recent-thumb" loading="lazy">
+                    <div class="recent-info">
+                        <span class="recent-title">${entry.title.$t}</span>
+                    </div>
+                </div>
+            `;
+        }
+        recentContainer.innerHTML = recentHtml;
     }
 
     function generateCategories() {
@@ -465,10 +410,7 @@
                 const match = entry.content.$t.match(/<img[^>]+src="([^">]+)"/);
                 if (match) imageUrl = match[1];
             }
-            
-            if (!imageUrl) {
-                imageUrl = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60";
-            }
+            if (!imageUrl) imageUrl = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60";
             
             let summary = "";
             if (entry.summary && entry.summary.$t) {
@@ -476,7 +418,7 @@
             } else if (entry.content && entry.content.$t) {
                 summary = entry.content.$t;
             }
-            summary = summary.replace(/<[^>]*>/g, "").substring(0, 110) + "...";
+            summary = summary.replace(/<[^>]*>/g, "").substring(0, 90) + "...";
 
             htmlContent += `
                 <article class="post-card">
@@ -484,13 +426,12 @@
                     <div class="post-content">
                         <h3 class="post-title">${title}</h3>
                         <p class="post-excerpt">${summary}</p>
-                        <span onclick="readFullPost(${i})" class="btn-link">اقرأ المقال بالكامل ←</span>
+                        <span onclick="readFullPost(${i})" class="btn-link">اقرأ المقال ←</span>
                     </div>
                 </article>
             `;
         }
-        
-        container.innerHTML = htmlContent || '<p>لم يتم العثور على مقالات تطابق خيارات البحث الحالية.</p>';
+        container.innerHTML = htmlContent || '<p>لم يتم العثور على مقالات تطابق خيارات البحث.</p>';
     }
 
     function readFullPost(index) {
@@ -498,6 +439,7 @@
         if (!entry) return;
 
         document.getElementById('main-blog-view').style.display = 'none';
+        document.getElementById('sidebar-view').style.display = 'none'; // إخفاء الصندوق الجانبي لتركيز القراءة
         document.getElementById('single-post-view').style.display = 'block';
         document.getElementById('article-title').innerText = entry.title.$t;
         
@@ -520,7 +462,6 @@
         const bodyContainer = document.getElementById('article-body');
         const tocContainer = document.getElementById('article-toc');
         const tocList = document.getElementById('toc-list');
-        
         const headings = bodyContainer.querySelectorAll('h2, h3');
         tocList.innerHTML = '';
 
@@ -529,26 +470,20 @@
             headings.forEach((heading, idx) => {
                 const headingId = 'heading-' + idx;
                 heading.setAttribute('id', headingId);
-                
                 const li = document.createElement('li');
                 if (heading.tagName.toLowerCase() === 'h3') li.className = 'toc-depth-h3';
-                
                 const a = document.createElement('a');
                 a.setAttribute('href', '#' + headingId);
                 a.innerText = heading.innerText || heading.textContent;
-                
                 a.addEventListener('click', function(e) {
                     e.preventDefault();
                     const element = document.getElementById(headingId);
                     const offset = 90;
                     const bodyRect = document.body.getBoundingClientRect().top;
                     const elementRect = element.getBoundingClientRect().top;
-                    const elementPosition = elementRect - bodyRect;
-                    const offsetPosition = elementPosition - offset;
-
+                    const offsetPosition = (elementRect - bodyRect) - offset;
                     window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 });
-
                 li.appendChild(a);
                 tocList.appendChild(li);
             });
@@ -560,6 +495,7 @@
     function showMainView() {
         document.getElementById('single-post-view').style.display = 'none';
         document.getElementById('main-blog-view').style.display = 'block';
+        document.getElementById('sidebar-view').style.display = 'flex'; // إعادة إظهار الصندوق الجانبي
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
