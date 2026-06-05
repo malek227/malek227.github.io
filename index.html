@@ -89,7 +89,6 @@
             content: "🔍"; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.6;
         }
 
-        /* زوار الرابط في الهيدر */
         .nav-blog-link {
             background: var(--primary-gradient);
             color: white;
@@ -149,7 +148,7 @@
             100% { transform: translate3d(100%, 0, 0); }
         }
 
-        /* 🗂️ توزيع مساحة الصفحة (شاشة رئيسية + جانبي) */
+        /* 🗂️ توزيع مساحة الصفحة */
         .main-layout {
             max-width: 1150px;
             margin: 30px auto;
@@ -183,7 +182,44 @@
             border: 1px solid #eef0f4;
         }
         
-        /* بطاقة دعوة لزيارة المدونة الأصلية في السايدبار */
+        /* ✨ صندوق هوية المدونة والتعريف المضاف حديثاً */
+        .widget-profile {
+            text-align: center;
+            background: var(--card-bg);
+            border: 1px solid #eef0f4;
+        }
+        .profile-logo-wrapper {
+            margin: 0 auto 15px auto;
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 6px 15px rgba(0, 86, 179, 0.15);
+        }
+        .profile-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a1d20;
+            margin: 0 0 5px 0;
+        }
+        .profile-title {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .profile-desc {
+            font-size: 0.88rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+        }
+
         .widget-promo {
             background: linear-gradient(135deg, #eef4fc 0%, #e3edff 100%);
             border: 1px solid #d2e3fc;
@@ -297,7 +333,6 @@
         <div class="search-box">
             <input type="text" id="search-input" placeholder="ابحث عن المقالات والمواضيع..." oninput="filterPosts()">
         </div>
-        <!-- 🔗 رابط توجيه للمدونة الرئيسية في البار العلوي -->
         <a href="https://malekahmed2.blogspot.com" target="_blank" class="nav-blog-link">🌐 زيارة المدونة الرسمية</a>
     </div>
 </nav>
@@ -337,7 +372,15 @@
 
     <!-- القسم الأيسر: الصناديق الجانبية -->
     <aside id="sidebar-view" class="sidebar">
-        <!-- 🔗 بطاقة التوجيه والترحيب للمدونة الرئيسية في السايدبار -->
+        <!-- ✨ صندوق هوية المدونة والتعريف الجديد بالكامل -->
+        <div class="widget widget-profile">
+            <div class="profile-logo-wrapper">📊</div>
+            <h2 class="profile-name">تطوير الأعمال والتقنية</h2>
+            <span class="profile-title">خبير تكنولوجيا رائد الأفكار التطويرية</span>
+            <p class="profile-desc">منصة متكاملة متخصصة في تقديم أحدث المقالات التقنية، حلول تطوير المشاريع، الإستراتيجيات الإدارية، وأنظمة FinTech المتطورة.</p>
+        </div>
+
+        <!-- بطاقة التوجيه والترحيب للمدونة الرئيسية -->
         <div class="widget widget-promo">
             <h3 class="widget-title" style="border-bottom:none; margin-bottom:10px; justify-content:center;">📢 تابعنا هناك</h3>
             <p>للمزيد من الشروحات الحصرية والتفاعل المباشر مع المقالات الجديدة والمميزة:</p>
