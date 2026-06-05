@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطوير الأعمال والتقنية</title>
     
-    <!-- 🚀 سكريبت إعلانات جوجل أدسنس التلقائية (تم ربطه بحسابك مباشرة) -->
+    <!-- 🚀 سكريبت إعلانات جوجل أدسنس التلقائية -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2065444846888494" crossorigin="anonymous"></script>
 
     <style>
@@ -21,16 +21,95 @@
             color: var(--text-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 30px;
+            padding: 0;
         }
+        
+        /* 🌐 تصميم القائمة العلوية الاحترافية */
+        .navbar {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .search-box {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px 35px 10px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus {
+            border-color: var(--primary-color);
+        }
+        .search-box::after {
+            content: "🔍";
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
         .container {
-            max-width: 900px;
-            margin: 0 auto;
+            max-width: 950px;
+            margin: 30px auto;
             background: var(--card-bg);
             border-radius: 14px;
             padding: 40px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
+        
+        /* 🏷️ شريط الأقسام والتصنيفات الأنيق */
+        .categories-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .category-btn {
+            background-color: #f1f3f5;
+            color: #495057;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
         h1 {
             color: var(--primary-color);
             font-size: 26px;
@@ -118,7 +197,7 @@
             padding-bottom: 15px;
         }
         
-        /* 📋 تنسيق الفهرس التلقائي للمقال */
+        /* 📋 تنسيق الفهرس التلقائي */
         .post-toc {
             background-color: #f8f9fa;
             border: 1px solid #e9ecef;
@@ -166,7 +245,6 @@
         .single-post-body p {
             font-size: 1.15rem;
             line-height: 1.9;
-            color: #333333;
             margin-bottom: 25px;
         }
         .single-post-body h2, .single-post-body h3 {
@@ -174,7 +252,7 @@
             margin-top: 35px;
             margin-bottom: 15px;
             font-weight: 600;
-            scroll-margin-top: 20px; /* تمنع اختفاء العناوين تحت حافة الشاشة عند الانتقال السريع */
+            scroll-margin-top: 80px; /* تم تعديلها لتراعي ارتفاع الـ Navbar الثابت عند القفز السريع */
         }
         .single-post-body h2 { font-size: 1.6rem; border-right: 4px solid var(--primary-color); padding-right: 12px; }
         
@@ -230,13 +308,23 @@
 </head>
 <body>
 
+<!-- 🌐 القائمة العلوية المضافة حديثاً -->
+<nav class="navbar">
+    <a class="nav-logo" onclick="showMainView()">📊 تطوير الأعمال والتقنية</a>
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="ابحث عن المقالات والمواضيع..." oninput="filterPosts()">
+    </div>
+</nav>
+
 <div class="container">
     <!-- واجهة القائمة الرئيسية للمقالات -->
     <div id="main-blog-view">
         <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
-        <div id="status-text">
-            <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالكامل من المدونة:</p>
-        </div>
+        <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالكامل من المدونة:</p>
+        
+        <!-- 🏷️ شريط التصنيفات والأقسام التلقائي المضاف حديثاً -->
+        <div id="categories-container" class="categories-bar"></div>
+
         <!-- حاوية عرض المنشورات -->
         <div id="posts-container" class="posts-grid"></div>
     </div>
@@ -247,7 +335,7 @@
         <h1 id="article-title" class="single-post-title"></h1>
         <div id="article-meta" class="single-post-meta"></div>
         
-        <!-- 📋 صندوق الفهرس التلقائي للمقال (يظهر فقط إذا احتوى المقال على عناوين فرعية) -->
+        <!-- صندوق الفهرس التلقائي للمقال -->
         <div id="article-toc" class="post-toc" style="display: none;">
             <p class="toc-title">محتويات المقال (فهرس سريع):</p>
             <ul id="toc-list" class="toc-list"></ul>
@@ -259,21 +347,82 @@
 
 <script>
     let blogEntries = [];
+    let currentCategory = 'الكل';
+    let searchQuery = '';
 
+    // وظيفة استقبال ومعالجة البيانات القادمة من بلوجر
     function myBloggerFeed(data) {
-        const container = document.getElementById('posts-container');
         if (!data || !data.feed || !data.feed.entry) {
-            container.innerHTML = '<p>لا توجد منشورات متاحة حالياً.</p>';
+            document.getElementById('posts-container').innerHTML = '<p>لا توجد منشورات متاحة حالياً.</p>';
             return;
         }
 
         blogEntries = data.feed.entry;
+        
+        // توليد أزرار الأقسام والتصنيفات ديناميكياً
+        generateCategories();
+        
+        // عرض الكروت في البداية
+        renderPosts();
+    }
+
+    // 🏷️ سكريبت استخراج الأقسام وصناعة الأزرار تلقائياً
+    function generateCategories() {
+        const catContainer = document.getElementById('categories-container');
+        let categories = new Set();
+        categories.add('الكل');
+
+        blogEntries.forEach(entry => {
+            if (entry.category) {
+                entry.category.forEach(cat => {
+                    if (cat.term) categories.add(cat.term);
+                });
+            }
+        });
+
+        let catHtml = '';
+        categories.forEach(cat => {
+            const isActive = cat === currentCategory ? 'active' : '';
+            catHtml += `<button class="category-btn ${isActive}" onclick="setCategory('${cat}', this)">📁 ${cat}</button>`;
+        });
+        catContainer.innerHTML = catHtml;
+    }
+
+    function setCategory(cat, btn) {
+        currentCategory = cat;
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPosts();
+    }
+
+    // 🔍 وظيفة تحديث قيمة البحث أثناء الكتابة
+    function filterPosts() {
+        searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+        renderPosts();
+    }
+
+    // 📦 وظيفة بناء وعرض الكروت بناءً على الفلترة والبحث
+    function renderPosts() {
+        const container = document.getElementById('posts-container');
         let htmlContent = '';
         
         for (let i = 0; i < blogEntries.length; i++) {
             const entry = blogEntries[i];
             const title = entry.title.$t;
             
+            // جلب الأقسام التابع لها المقال للفحص
+            let entryCats = ['الكل'];
+            if (entry.category) {
+                entry.category.forEach(c => entryCats.push(c.term));
+            }
+
+            // فحص محتوى وجسم المقال من أجل البحث المتقدم
+            let fullText = (title + " " + (entry.content ? entry.content.$t : "")).toLowerCase();
+
+            // تطبيق شروط التصفية (القسم الحالي + نص البحث)
+            if (!entryCats.includes(currentCategory)) continue;
+            if (searchQuery && !fullText.includes(searchQuery)) continue;
+
             let imageUrl = "";
             if (entry.media$thumbnail) {
                 imageUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w640-h360-c/');
@@ -305,7 +454,8 @@
                 </article>
             `;
         }
-        container.innerHTML = htmlContent;
+        
+        container.innerHTML = htmlContent || '<p>لم يتم العثور على مقالات تطابق خيارات البحث الحالية.</p>';
     }
 
     function readFullPost(index) {
@@ -327,10 +477,7 @@
         }
         
         document.getElementById('article-body').innerHTML = fullBody;
-
-        // 🧠 سكريبت توليد الفهرس (TOC) ديناميكياً
         generateTableOfContents();
-
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -339,39 +486,40 @@
         const tocContainer = document.getElementById('article-toc');
         const tocList = document.getElementById('toc-list');
         
-        // البحث عن كل عناوين h2 و h3 داخل المقال
         const headings = bodyContainer.querySelectorAll('h2, h3');
-        tocList.innerHTML = ''; // تصفية القائمة السابقة
+        tocList.innerHTML = '';
 
         if (headings.length > 0) {
-            tocContainer.style.display = 'block'; // إظهار صندوق الفهرس
-            
+            tocContainer.style.display = 'block';
             headings.forEach((heading, idx) => {
-                // إنشاء معرف فريد (ID) لكل عنوان للربط به بالقفز السريع
                 const headingId = 'heading-' + idx;
                 heading.setAttribute('id', headingId);
                 
-                // إنشاء عنصر القائمة في الفهرس
                 const li = document.createElement('li');
-                if (heading.tagName.toLowerCase() === 'h3') {
-                    li.className = 'toc-depth-h3';
-                }
+                if (heading.tagName.toLowerCase() === 'h3') li.className = 'toc-depth-h3';
                 
                 const a = document.createElement('a');
                 a.setAttribute('href', '#' + headingId);
                 a.innerText = heading.innerText || heading.textContent;
                 
-                // إضافة خاصية التمرير السلس عند الضغط
                 a.addEventListener('click', function(e) {
                     e.preventDefault();
-                    document.getElementById(headingId).scrollIntoView({ behavior: 'smooth' });
+                    // استخدام القفز المخصص لمراعاة البار الثابت العلوي
+                    const element = document.getElementById(headingId);
+                    const offset = 90;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = element.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 });
 
                 li.appendChild(a);
                 tocList.appendChild(li);
             });
         } else {
-            tocContainer.style.display = 'none'; // إخفاء الصندوق إذا كان المقال بلا عناوين فرعية
+            tocContainer.style.display = 'none';
         }
     }
 
