@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطوير الأعمال والتقنية</title>
+    
+    <!-- 🚀 سكريبت إعلانات جوجل أدسنس التلقائية (تم ربطه بحسابك مباشرة) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2065444846888494" crossorigin="anonymous"></script>
+
     <style>
         :root {
             --primary-color: #0056b3;
@@ -94,7 +98,7 @@
             font-size: 0.95rem;
         }
         
-        /* 🎨 مكتبة تنسيقات متكاملة للمقالات المستوردة داخلياً */
+        /* 🎨 تنسيقات واجهة المقال الكامل */
         .single-post-view {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
@@ -109,12 +113,51 @@
         .single-post-meta {
             color: #868e96;
             font-size: 0.92rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border-bottom: 2px solid #f1f3f5;
             padding-bottom: 15px;
         }
         
-        /* تنسيق محتوى المقال الداخلي بالتفصيل */
+        /* 📋 تنسيق الفهرس التلقائي للمقال */
+        .post-toc {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-right: 4px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .toc-title {
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            color: #495057;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        .toc-depth-h3 {
+            padding-right: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* تنسيق محتوى المقال الداخلي */
         .single-post-body {
             font-size: 1.15rem;
             line-height: 1.9;
@@ -126,16 +169,15 @@
             color: #333333;
             margin-bottom: 25px;
         }
-        .single-post-body h2, .single-post-body h3, .single-post-body h4 {
+        .single-post-body h2, .single-post-body h3 {
             color: var(--primary-color);
             margin-top: 35px;
             margin-bottom: 15px;
             font-weight: 600;
+            scroll-margin-top: 20px; /* تمنع اختفاء العناوين تحت حافة الشاشة عند الانتقال السريع */
         }
         .single-post-body h2 { font-size: 1.6rem; border-right: 4px solid var(--primary-color); padding-right: 12px; }
-        .single-post-body h3 { font-size: 1.35rem; }
         
-        /* تنسيق الصور داخل المقال */
         .single-post-body img {
             max-width: 100% !important;
             height: auto !important;
@@ -144,8 +186,6 @@
             display: block;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        
-        /* تنسيق الجداول المستوردة من بلوجر */
         .single-post-body table {
             width: 100%;
             margin: 30px 0;
@@ -153,43 +193,22 @@
             font-size: 1rem;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
         .single-post-body th, .single-post-body td {
             padding: 12px 15px;
             text-align: right;
             border-bottom: 1px solid #eef1f6;
         }
-        .single-post-body th {
-            background-color: var(--primary-color);
-            color: #ffffff;
-            font-weight: 600;
-        }
-        .single-post-body tr:nth-child(even) {
-            background-color: #fcfdfe;
-        }
-
-        /* تنسيق القوائم النقطية والرقمية */
-        .single-post-body ul, .single-post-body ol {
-            padding-right: 25px;
-            margin-bottom: 25px;
-        }
-        .single-post-body li {
-            margin-bottom: 10px;
-        }
-
-        /* تنسيق الاقتباسات والنصوص المظللة */
+        .single-post-body th { background-color: var(--primary-color); color: #ffffff; }
+        .single-post-body tr:nth-child(even) { background-color: #fcfdfe; }
         .single-post-body blockquote {
             background-color: var(--secondary-color);
             border-right: 5px solid var(--primary-color);
             padding: 15px 20px;
             margin: 25px 0;
             border-radius: 4px;
-            font-style: italic;
-            color: #495057;
         }
         
-        /* أزرار التنقل */
         .back-button {
             display: inline-flex;
             align-items: center;
@@ -200,14 +219,9 @@
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.95rem;
             cursor: pointer;
-            transition: background 0.2s ease;
         }
-        .back-button:hover {
-            background-color: #e9ecef;
-            color: #212529;
-        }
+        .back-button:hover { background-color: #e9ecef; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -232,6 +246,13 @@
         <span class="back-button" onclick="showMainView()">→ العودة لقائمة المقالات</span>
         <h1 id="article-title" class="single-post-title"></h1>
         <div id="article-meta" class="single-post-meta"></div>
+        
+        <!-- 📋 صندوق الفهرس التلقائي للمقال (يظهر فقط إذا احتوى المقال على عناوين فرعية) -->
+        <div id="article-toc" class="post-toc" style="display: none;">
+            <p class="toc-title">محتويات المقال (فهرس سريع):</p>
+            <ul id="toc-list" class="toc-list"></ul>
+        </div>
+
         <div id="article-body" class="single-post-body"></div>
     </div>
 </div>
@@ -239,7 +260,6 @@
 <script>
     let blogEntries = [];
 
-    // وظيفة استقبال ومعالجة البيانات القادمة من بلوجر
     function myBloggerFeed(data) {
         const container = document.getElementById('posts-container');
         if (!data || !data.feed || !data.feed.entry) {
@@ -288,7 +308,6 @@
         container.innerHTML = htmlContent;
     }
 
-    // وظيفة فتح المقال الكامل وتطبيق التنسيقات عليه داخلياً
     function readFullPost(index) {
         const entry = blogEntries[index];
         if (!entry) return;
@@ -307,9 +326,53 @@
             fullBody = entry.summary.$t;
         }
         
-        // تنظيف وتجهيز المحتوى لعرضه بالتنسيقات الجديدة
         document.getElementById('article-body').innerHTML = fullBody;
+
+        // 🧠 سكريبت توليد الفهرس (TOC) ديناميكياً
+        generateTableOfContents();
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function generateTableOfContents() {
+        const bodyContainer = document.getElementById('article-body');
+        const tocContainer = document.getElementById('article-toc');
+        const tocList = document.getElementById('toc-list');
+        
+        // البحث عن كل عناوين h2 و h3 داخل المقال
+        const headings = bodyContainer.querySelectorAll('h2, h3');
+        tocList.innerHTML = ''; // تصفية القائمة السابقة
+
+        if (headings.length > 0) {
+            tocContainer.style.display = 'block'; // إظهار صندوق الفهرس
+            
+            headings.forEach((heading, idx) => {
+                // إنشاء معرف فريد (ID) لكل عنوان للربط به بالقفز السريع
+                const headingId = 'heading-' + idx;
+                heading.setAttribute('id', headingId);
+                
+                // إنشاء عنصر القائمة في الفهرس
+                const li = document.createElement('li');
+                if (heading.tagName.toLowerCase() === 'h3') {
+                    li.className = 'toc-depth-h3';
+                }
+                
+                const a = document.createElement('a');
+                a.setAttribute('href', '#' + headingId);
+                a.innerText = heading.innerText || heading.textContent;
+                
+                // إضافة خاصية التمرير السلس عند الضغط
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById(headingId).scrollIntoView({ behavior: 'smooth' });
+                });
+
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+        } else {
+            tocContainer.style.display = 'none'; // إخفاء الصندوق إذا كان المقال بلا عناوين فرعية
+        }
     }
 
     function showMainView() {
