@@ -37,6 +37,11 @@
             justify-content: space-between;
             align-items: center;
         }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
         .nav-logo {
             text-decoration: none;
             display: flex;
@@ -71,7 +76,7 @@
         }
         .logo-subtitle { font-size: 0.72rem; color: #868e96; font-weight: 600; margin-top: 2px; }
 
-        .search-box { position: relative; max-width: 300px; width: 100%; }
+        .search-box { position: relative; max-width: 250px; width: 100%; }
         .search-box input {
             width: 100%;
             padding: 10px 35px 10px 15px;
@@ -82,6 +87,23 @@
         }
         .search-box::after {
             content: "🔍"; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.6;
+        }
+
+        /* زوار الرابط في الهيدر */
+        .nav-blog-link {
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+            transition: all 0.3s ease;
+        }
+        .nav-blog-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 86, 179, 0.3);
         }
 
         /* 📣 تصميم شريط الأخبار المتحرك */
@@ -147,7 +169,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
         
-        /* 📦 تصميم صندوق "أحدث المقالات" الجانبي */
+        /* 📦 تصميم الصناديق الجانبية */
         .sidebar {
             display: flex;
             flex-direction: column;
@@ -160,6 +182,36 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.04);
             border: 1px solid #eef0f4;
         }
+        
+        /* بطاقة دعوة لزيارة المدونة الأصلية في السايدبار */
+        .widget-promo {
+            background: linear-gradient(135deg, #eef4fc 0%, #e3edff 100%);
+            border: 1px solid #d2e3fc;
+            text-align: center;
+        }
+        .widget-promo p {
+            font-size: 0.95rem;
+            color: #3c4043;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .sidebar-blog-btn {
+            display: block;
+            background: var(--primary-gradient);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0, 86, 179, 0.15);
+            transition: all 0.2s;
+        }
+        .sidebar-blog-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(0, 86, 179, 0.25);
+        }
+
         .widget-title {
             font-size: 1.1rem;
             font-weight: 700;
@@ -220,7 +272,7 @@
         .toc-list a:hover { color: var(--primary-color); text-decoration: underline; }
 
         /* محتوى المقال الداخلي */
-        .single-post-body { font-size: 1.15rem; line-height: 1.9; color: #333; }
+        .single-post-body { font-size: 1.15rem; line-height: 1.9; color: #33; }
         .single-post-body p { margin-bottom: 25px; }
         .single-post-body h2, .single-post-body h3 { color: var(--primary-color); margin-top: 35px; margin-bottom: 15px; font-weight: 600; scroll-margin-top: 90px; }
         .single-post-body h2 { font-size: 1.5rem; border-right: 4px solid var(--primary-color); padding-right: 12px; }
@@ -241,18 +293,22 @@
             <span class="logo-subtitle">MANAGEMENT & TECH</span>
         </div>
     </div>
-    <div class="search-box">
-        <input type="text" id="search-input" placeholder="ابحث عن المقالات والمواضيع..." oninput="filterPosts()">
+    <div class="nav-left">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="ابحث عن المقالات والمواضيع..." oninput="filterPosts()">
+        </div>
+        <!-- 🔗 رابط توجيه للمدونة الرئيسية في البار العلوي -->
+        <a href="https://malekahmed2.blogspot.com" target="_blank" class="nav-blog-link">🌐 زيارة المدونة الرسمية</a>
     </div>
 </nav>
 
-<!-- 📣 شريط الأخبار المتحرك المضاف حديثاً -->
+<!-- 📣 شريط الأخبار المتحرك -->
 <div class="ticker-wrap">
     <div class="ticker-title">🔥 آخر التحديثات:</div>
     <div id="ticker-container" class="ticker-content"></div>
 </div>
 
-<!-- 🗂️ التقسيم الهيكلي الجديد للموقع -->
+<!-- 🗂️ التقسيم الهيكلي للموقع -->
 <div class="main-layout">
     
     <!-- القسم الأيمن: الواجهة الرئيسية للمقالات أو قراءة مقال مفرد -->
@@ -279,8 +335,15 @@
         </div>
     </main>
 
-    <!-- القسم الأيسر: الصناديق الجانبية (أحدث المقالات) -->
+    <!-- القسم الأيسر: الصناديق الجانبية -->
     <aside id="sidebar-view" class="sidebar">
+        <!-- 🔗 بطاقة التوجيه والترحيب للمدونة الرئيسية في السايدبار -->
+        <div class="widget widget-promo">
+            <h3 class="widget-title" style="border-bottom:none; margin-bottom:10px; justify-content:center;">📢 تابعنا هناك</h3>
+            <p>للمزيد من الشروحات الحصرية والتفاعل المباشر مع المقالات الجديدة والمميزة:</p>
+            <a href="https://malekahmed2.blogspot.com" target="_blank" class="sidebar-blog-btn">🔗 انتقل إلى المدونة الرسمية</a>
+        </div>
+
         <div class="widget">
             <h3 class="widget-title">📌 أحدث المقالات</h3>
             <div id="recent-posts-container" class="recent-posts-list"></div>
@@ -302,15 +365,12 @@
 
         blogEntries = data.feed.entry;
         
-        // تشغيل العناصر المضافة حديثاً
         generateTicker();
         generateRecentPostsWidget();
-        
         generateCategories();
         renderPosts();
     }
 
-    // 📣 بناء شريط الأخبار التلقائي (آخر 5 مقالات)
     function generateTicker() {
         const tickerContainer = document.getElementById('ticker-container');
         let tickerHtml = '';
@@ -322,7 +382,6 @@
         tickerContainer.innerHTML = tickerHtml;
     }
 
-    // 📌 بناء صندوق "أحدث المقالات" الجانبي بالتصاوير المصغرة
     function generateRecentPostsWidget() {
         const recentContainer = document.getElementById('recent-posts-container');
         let recentHtml = '';
@@ -439,7 +498,7 @@
         if (!entry) return;
 
         document.getElementById('main-blog-view').style.display = 'none';
-        document.getElementById('sidebar-view').style.display = 'none'; // إخفاء الصندوق الجانبي لتركيز القراءة
+        document.getElementById('sidebar-view').style.display = 'none';
         document.getElementById('single-post-view').style.display = 'block';
         document.getElementById('article-title').innerText = entry.title.$t;
         
@@ -495,7 +554,7 @@
     function showMainView() {
         document.getElementById('single-post-view').style.display = 'none';
         document.getElementById('main-blog-view').style.display = 'block';
-        document.getElementById('sidebar-view').style.display = 'flex'; // إعادة إظهار الصندوق الجانبي
+        document.getElementById('sidebar-view').style.display = 'flex';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
