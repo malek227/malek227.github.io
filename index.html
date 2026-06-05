@@ -86,22 +86,84 @@
             text-decoration: none;
             font-weight: bold;
             margin-top: auto;
+            cursor: pointer;
+        }
+        
+        /* تنسيقات صفحة قراءة المقال الكامل */
+        .single-post-view {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .single-post-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .single-post-meta {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .single-post-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        .single-post-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
-    <div id="status-text">
-        <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالصور من المدونة:</p>
+    <!-- واجهة القائمة الرئيسية للمقالات -->
+    <div id="main-blog-view">
+        <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
+        <div id="status-text">
+            <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالصور من المدونة:</p>
+        </div>
+        <!-- حاوية عرض المنشورات -->
+        <div id="posts-container" class="posts-grid"></div>
     </div>
-    
-    <div id="posts-container" class="posts-grid"></div>
+
+    <!-- واجهة قراءة المقال المفرد (مخفية افتراضياً) -->
+    <div id="single-post-view" class="single-post-view">
+        <span class="back-button" onclick="showMainView()">→ العودة للمقالات</span>
+        <h1 id="article-title" class="single-post-title"></h1>
+        <div id="article-meta" class="single-post-meta"></div>
+        <div id="article-body" class="single-post-body"></div>
+    </div>
 </div>
 
 <script>
-    // 1. وظيفة استقبال ومعالجة بيانات مدونة بلوجر
+    // مصفوفة عالمية لحفظ المقالات بعد جلبها لسهولة استدعائها
+    let blogEntries = [];
+
+    // وظيفة استقبال ومعالجة البيانات القادمة من بلوجر
     function myBloggerFeed(data) {
         const container = document.getElementById('posts-container');
         
@@ -110,41 +172,27 @@
             return;
         }
 
-        const entries = data.feed.entry;
+        blogEntries = data.feed.entry;
         let htmlContent = '';
         
-        // جلب أول 6 مقالات
-        const maxResults = Math.min(entries.length, 6);
-        for (let i = 0; i < maxResults; i++) {
-            const entry = entries[i];
+        for (let i = 0; i < blogEntries.length; i++) {
+            const entry = blogEntries[i];
             const title = entry.title.$t;
             
-            // جلب رابط المقال
-            let link = "";
-            for (let j = 0; j < entry.link.length; j++) {
-                if (entry.link[j].rel === 'alternate') {
-                    link = entry.link[j].href;
-                    break;
-                }
-            }
-            
-            // استخراج رابط الصورة من المقال بدقة
+            // استخراج رابط الصورة
             let imageUrl = "";
             if (entry.media$thumbnail) {
-                // جلب الصورة المصغرة واستبدال الحجم الافتراضي الصغير جداً بحجم أكبر وأوضح لتبدو احترافية
                 imageUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w640-h360-c/');
             } else if (entry.content && entry.content.$t) {
-                // فحص محتوى المقال بحثاً عن أي وسم صورة في حال عدم وجود مصغرة
                 const match = entry.content.$t.match(/<img[^>]+src="([^">]+)"/);
                 if (match) imageUrl = match[1];
             }
             
-            // إذا لم يتم العثور على أي صورة، نضع صورة غلاف تقنية افتراضية ممتازة
             if (!imageUrl) {
                 imageUrl = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60";
             }
             
-            // جلب نص المقال وتصفيته
+            // استخراج مقتطف نصي
             let summary = "";
             if (entry.summary && entry.summary.$t) {
                 summary = entry.summary.$t;
@@ -153,14 +201,14 @@
             }
             summary = summary.replace(/<[^>]*>/g, "").substring(0, 100) + "...";
 
-            // بناء تصميم الكارت المطور شاملاً الصورة
+            // بناء كارت المقال وجعل زر القراءة يستدعي دالة برمجية داخل الموقع بدلاً من الانتقال الخارجي
             htmlContent += `
                 <article class="post-card">
                     <img src="${imageUrl}" alt="${title}" class="post-image" loading="lazy">
                     <div class="post-content">
                         <h3 class="post-title">${title}</h3>
                         <p class="post-excerpt">${summary}</p>
-                        <a href="${link}" target="_blank" class="btn-link">اقرأ المقال بالكامل ←</a>
+                        <span onclick="readFullPost(${i})" class="btn-link">اقرأ المقال بالكامل ←</span>
                     </div>
                 </article>
             `;
@@ -169,19 +217,45 @@
         container.innerHTML = htmlContent;
     }
 
-    // 2. نظام التوجيه الذكي للمقالات القديمة
-    (function() {
-        var bloggerDomain = "https://malekahmed2.blogspot.com";
-        var currentPath = window.location.pathname;
-        var currentSearch = window.location.search;
+    // وظيفة فتح وقراءة المقال بالكامل داخل نفس الصفحة
+    function readFullPost(index) {
+        const entry = blogEntries[index];
+        if (!entry) return;
 
-        if (currentPath && currentPath !== "/" && currentPath !== "/index.html") {
-            window.location.href = bloggerDomain + currentPath + currentSearch;
+        // إخفاء الواجهة الرئيسية وإظهار واجهة المقال
+        document.getElementById('main-blog-view').style.display = 'none';
+        document.getElementById('single-post-view').style.display = 'block';
+
+        // تعبئة بيانات المقال
+        document.getElementById('article-title').innerText = entry.title.$t;
+        
+        // جلب تاريخ النشر وتنسيقه
+        const publishedDate = new Date(entry.published.$t).toLocaleDateString('ar-YE', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('article-meta').innerText = "تم النشر في: " + publishedDate;
+        
+        // جلب المحتوى الكامل للمقال (بما فيه من نصوص وتنسيقات وصور أصيلة)
+        let fullBody = "";
+        if (entry.content && entry.content.$t) {
+            fullBody = entry.content.$t;
+        } else if (entry.summary && entry.summary.$t) {
+            fullBody = entry.summary.$t;
         }
-    })();
+        document.getElementById('article-body').innerHTML = fullBody;
+        
+        // الصعود لأعلى الصفحة تلقائياً عند فتح المقال
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // وظيفة العودة للرئيسية وقائمة المقالات
+    function showMainView() {
+        document.getElementById('single-post-view').style.display = 'none';
+        document.getElementById('main-blog-view').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 </script>
 
-<script src="https://malekahmed2.blogspot.com/feeds/posts/default?alt=json-in-script&callback=myBloggerFeed"></script>
+<!-- استدعاء سكريبت الخلاصة من بلوجر لجلب البيانات كامة -->
+<script src="https://malekahmed2.blogspot.com/feeds/posts/default?alt=json-in-script&callback=myBloggerFeed&max-results=50"></script>
 
 </body>
 </html>
