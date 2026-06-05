@@ -7,8 +7,10 @@
     <style>
         :root {
             --primary-color: #0056b3;
+            --secondary-color: #eef4fc;
             --bg-color: #f8f9fa;
-            --text-color: #333;
+            --text-color: #2b303a;
+            --card-bg: #ffffff;
         }
         body {
             background-color: var(--bg-color);
@@ -20,30 +22,31 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
         h1 {
             color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
         p {
             font-size: 16px;
-            line-height: 1.6;
-            color: #666;
+            line-height: 1.7;
+            color: #555962;
         }
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            margin-top: 30px;
+            margin-top: 35px;
         }
         .post-card {
-            background: #ffffff;
-            border: 1px solid #eeeeee;
+            background: var(--card-bg);
+            border: 1px solid #eef0f4;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
@@ -53,7 +56,7 @@
         }
         .post-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
         .post-image {
             width: 100%;
@@ -68,16 +71,17 @@
             flex-grow: 1;
         }
         .post-title {
-            color: #222;
-            font-size: 1.2rem;
-            margin: 0 0 10px 0;
+            color: #1a1d20;
+            font-size: 1.25rem;
+            margin: 0 0 12px 0;
             line-height: 1.4;
+            font-weight: 600;
         }
         .post-excerpt {
-            color: #555;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
+            color: #6c757d;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
             flex-grow: 1;
         }
         .btn-link {
@@ -87,53 +91,126 @@
             font-weight: bold;
             margin-top: auto;
             cursor: pointer;
+            font-size: 0.95rem;
         }
         
-        /* تنسيقات صفحة قراءة المقال الكامل */
+        /* 🎨 مكتبة تنسيقات متكاملة للمقالات المستوردة داخلياً */
         .single-post-view {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.4s ease-in-out;
         }
         .single-post-title {
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 20px;
+            color: #111;
+            font-size: 2.2rem;
+            line-height: 1.4;
+            margin: 20px 0 10px 0;
+            font-weight: 700;
         }
         .single-post-meta {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            color: #868e96;
+            font-size: 0.92rem;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f1f3f5;
+            padding-bottom: 15px;
         }
+        
+        /* تنسيق محتوى المقال الداخلي بالتفصيل */
         .single-post-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #333333;
         }
+        .single-post-body p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #333333;
+            margin-bottom: 25px;
+        }
+        .single-post-body h2, .single-post-body h3, .single-post-body h4 {
+            color: var(--primary-color);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .single-post-body h2 { font-size: 1.6rem; border-right: 4px solid var(--primary-color); padding-right: 12px; }
+        .single-post-body h3 { font-size: 1.35rem; }
+        
+        /* تنسيق الصور داخل المقال */
         .single-post-body img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 15px 0;
+            max-width: 100% !important;
+            height: auto !important;
+            border-radius: 10px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+        
+        /* تنسيق الجداول المستوردة من بلوجر */
+        .single-post-body table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: collapse;
+            font-size: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .single-post-body th, .single-post-body td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #eef1f6;
+        }
+        .single-post-body th {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .single-post-body tr:nth-child(even) {
+            background-color: #fcfdfe;
+        }
+
+        /* تنسيق القوائم النقطية والرقمية */
+        .single-post-body ul, .single-post-body ol {
+            padding-right: 25px;
+            margin-bottom: 25px;
+        }
+        .single-post-body li {
+            margin-bottom: 10px;
+        }
+
+        /* تنسيق الاقتباسات والنصوص المظللة */
+        .single-post-body blockquote {
+            background-color: var(--secondary-color);
+            border-right: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #495057;
+        }
+        
+        /* أزرار التنقل */
         .back-button {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 8px 16px;
-            background-color: #6c757d;
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 10px 18px;
+            background-color: #f1f3f5;
+            color: #495057;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
+            transition: background 0.2s ease;
         }
         .back-button:hover {
-            background-color: #5a6268;
+            background-color: #e9ecef;
+            color: #212529;
         }
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -144,7 +221,7 @@
     <div id="main-blog-view">
         <h1>مرحباً بك في المنصة المطورة لـ تطوير الأعمال والتقنية</h1>
         <div id="status-text">
-            <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالصور من المدونة:</p>
+            <p>تابع أحدث المقالات التقنية وإستراتيجيات تطوير المشاريع المزامنة تلقائياً بالكامل من المدونة:</p>
         </div>
         <!-- حاوية عرض المنشورات -->
         <div id="posts-container" class="posts-grid"></div>
@@ -152,7 +229,7 @@
 
     <!-- واجهة قراءة المقال المفرد (مخفية افتراضياً) -->
     <div id="single-post-view" class="single-post-view">
-        <span class="back-button" onclick="showMainView()">→ العودة للمقالات</span>
+        <span class="back-button" onclick="showMainView()">→ العودة لقائمة المقالات</span>
         <h1 id="article-title" class="single-post-title"></h1>
         <div id="article-meta" class="single-post-meta"></div>
         <div id="article-body" class="single-post-body"></div>
@@ -160,13 +237,11 @@
 </div>
 
 <script>
-    // مصفوفة عالمية لحفظ المقالات بعد جلبها لسهولة استدعائها
     let blogEntries = [];
 
     // وظيفة استقبال ومعالجة البيانات القادمة من بلوجر
     function myBloggerFeed(data) {
         const container = document.getElementById('posts-container');
-        
         if (!data || !data.feed || !data.feed.entry) {
             container.innerHTML = '<p>لا توجد منشورات متاحة حالياً.</p>';
             return;
@@ -179,7 +254,6 @@
             const entry = blogEntries[i];
             const title = entry.title.$t;
             
-            // استخراج رابط الصورة
             let imageUrl = "";
             if (entry.media$thumbnail) {
                 imageUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w640-h360-c/');
@@ -192,16 +266,14 @@
                 imageUrl = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60";
             }
             
-            // استخراج مقتطف نصي
             let summary = "";
             if (entry.summary && entry.summary.$t) {
                 summary = entry.summary.$t;
             } else if (entry.content && entry.content.$t) {
                 summary = entry.content.$t;
             }
-            summary = summary.replace(/<[^>]*>/g, "").substring(0, 100) + "...";
+            summary = summary.replace(/<[^>]*>/g, "").substring(0, 110) + "...";
 
-            // بناء كارت المقال وجعل زر القراءة يستدعي دالة برمجية داخل الموقع بدلاً من الانتقال الخارجي
             htmlContent += `
                 <article class="post-card">
                     <img src="${imageUrl}" alt="${title}" class="post-image" loading="lazy">
@@ -213,40 +285,33 @@
                 </article>
             `;
         }
-        
         container.innerHTML = htmlContent;
     }
 
-    // وظيفة فتح وقراءة المقال بالكامل داخل نفس الصفحة
+    // وظيفة فتح المقال الكامل وتطبيق التنسيقات عليه داخلياً
     function readFullPost(index) {
         const entry = blogEntries[index];
         if (!entry) return;
 
-        // إخفاء الواجهة الرئيسية وإظهار واجهة المقال
         document.getElementById('main-blog-view').style.display = 'none';
         document.getElementById('single-post-view').style.display = 'block';
-
-        // تعبئة بيانات المقال
         document.getElementById('article-title').innerText = entry.title.$t;
         
-        // جلب تاريخ النشر وتنسيقه
         const publishedDate = new Date(entry.published.$t).toLocaleDateString('ar-YE', { year: 'numeric', month: 'long', day: 'numeric' });
         document.getElementById('article-meta').innerText = "تم النشر في: " + publishedDate;
         
-        // جلب المحتوى الكامل للمقال (بما فيه من نصوص وتنسيقات وصور أصيلة)
         let fullBody = "";
         if (entry.content && entry.content.$t) {
             fullBody = entry.content.$t;
         } else if (entry.summary && entry.summary.$t) {
             fullBody = entry.summary.$t;
         }
-        document.getElementById('article-body').innerHTML = fullBody;
         
-        // الصعود لأعلى الصفحة تلقائياً عند فتح المقال
+        // تنظيف وتجهيز المحتوى لعرضه بالتنسيقات الجديدة
+        document.getElementById('article-body').innerHTML = fullBody;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // وظيفة العودة للرئيسية وقائمة المقالات
     function showMainView() {
         document.getElementById('single-post-view').style.display = 'none';
         document.getElementById('main-blog-view').style.display = 'block';
@@ -254,7 +319,6 @@
     }
 </script>
 
-<!-- استدعاء سكريبت الخلاصة من بلوجر لجلب البيانات كامة -->
 <script src="https://malekahmed2.blogspot.com/feeds/posts/default?alt=json-in-script&callback=myBloggerFeed&max-results=50"></script>
 
 </body>
