@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام لوحة تحكم إدارية HTML</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #00457c 0%, #0079c1 100%);
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --success-color: #2ecc71;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-color); padding: 40px 20px; display: flex; justify-content: center; }
+        .product-page { background: var(--card-bg); border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 600px; width: 100%; overflow: hidden; border: 1px solid #eef2f5; text-align: center; }
+        .header { background: var(--primary-gradient); color: white; padding: 30px 20px; }
+        .header h1 { margin: 0; font-size: 1.5rem; }
+        .body { padding: 30px; }
+        .price { font-size: 2.2rem; font-weight: 800; color: #00457c; margin-bottom: 15px; }
+        .desc { text-align: right; line-height: 1.7; color: #57606f; }
+        .paypal-btn { display: block; background: #ffc439; color: #111; text-decoration: none; padding: 14px; border-radius: 30px; font-weight: bold; margin-top: 25px; box-shadow: 0 4px 12px rgba(255, 196, 57, 0.3); }
+        #download-box { display: none; background-color: #e8f5e9; border: 2px dashed var(--success-color); border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .download-btn { display: inline-block; background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; text-decoration: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; margin-top: 10px; }
+        .back-link { display: inline-block; margin-top: 20px; color: #0079c1; text-decoration: none; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="product-page">
+    <div class="header">
+        <h1>📊 نظام لوحة تحكم إدارية HTML</h1>
+    </div>
+    <div class="body">
+        <div class="price">14.99$</div>
+        <div class="desc">
+            <h3>مميزات النظام:</h3>
+            <ul>
+                <li>تصميم لوحة تحكم متكاملة متجاوبة مع الموبايل والكمبيوتر.</li>
+                <li>كود منظم ونظيف سهل التعديل بالكامل.</li>
+                <li>جداول ذكية لعرض البيانات ورسوم بيانية تفاعلية.</li>
+            </ul>
+        </div>
+
+        <a href="https://www.paypal.com/donate/?hosted_button_id=9Z265UGAZT5AG" target="_blank" id="buy-btn" class="paypal-btn" onclick="showDownload()">
+            💳 شراء القالب والدفع عبر PayPal
+        </a>
+
+        <div id="download-box">
+            <h3 style="color: #1b5e20; margin-top: 0;">🎉 جاهز للتحميل</h3>
+            <p>بعد إتمام الدفع بنجاح، يمكنك تحميل الملف مباشرة:</p>
+            <a href="https://malek227.github.io/files/dashboard.zip" class="download-btn" download>📥 تحميل النظام المصدري (ZIP)</a>
+        </div>
+        
+        <a href="store.html" class="back-link">← العودة للمتجر الرئيسي</a>
+    </div>
+</div>
+
+<script>
+    function showDownload() {
+        setTimeout(function() {
+            document.getElementById('buy-btn').style.display = 'none';
+            document.getElementById('download-box').style.display = 'block';
+        }, 4000);
+    }
+</script>
+</body>
+              </html>
+
