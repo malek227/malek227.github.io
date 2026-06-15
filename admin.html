@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الأدمن | إضافة المنتجات</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --btn-gradient: linear-gradient(135deg, #00457c 0%, #0079c1 100%);
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --success-color: #10b981;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 20px;
+        }
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .admin-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        .admin-header h1 { margin: 0; font-size: 1.6rem; }
+        .admin-header p { margin: 8px 0 0 0; opacity: 0.8; font-size: 0.9rem; }
+        
+        .admin-form { padding: 30px; }
+        .form-group { margin-bottom: 20px; text-align: right; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+            font-family: inherit; box-sizing: border-box; outline: none; font-size: 0.95rem;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: #0079c1; }
+        
+        .submit-btn {
+            background: var(--btn-gradient); color: white; border: none; padding: 14px 30px;
+            border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 69, 124, 0.2); transition: all 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 69, 124, 0.3); }
+
+        /* منطقة توليد الكود والنتيجة */
+        .result-box { display: none; margin-top: 30px; padding: 20px; background: #fafafa; border: 2px dashed #cbd5e1; border-radius: 8px; }
+        .result-title { font-weight: bold; color: var(--success-color); margin-top: 0; display: flex; align-items: center; gap: 8px; }
+        .code-output {
+            background: #1e1e1e; color: #7ec699; padding: 15px; border-radius: 6px;
+            direction: ltr; text-align: left; overflow-x: auto; font-family: 'Courier New', Courier, monospace;
+            font-size: 0.88rem; max-height: 250px; margin-bottom: 15px; white-space: pre-wrap;
+        }
+        .copy-btn {
+            background: #475569; color: white; border: none; padding: 8px 16px; border-radius: 5px;
+            cursor: pointer; font-weight: 600; font-size: 0.85rem;
+        }
+        .copy-btn:hover { background: #334155; }
+    </style>
+</head>
+<body>
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>🛠️ لوحة تحكم أدمن المتجر الرقمي</h1>
+        <p>قم بتعبئة بيانات المنتج لتوليد كود الـ HTML الخاص به فوراً وبسهولة</p>
+    </div>
+
+    <div class="admin-form">
+        <div class="form-group">
+            <label for="prod-title">اسم المنتج أو المنشور:</label>
+            <input type="text" id="prod-title" placeholder="مثال: قالب مبيعات متطور HTML5">
+        </div>
+
+        <div class="form-group">
+            <label for="prod-icon">أيقونة أو إيموجي المنتج:</label>
+            <select id="prod-icon">
+                <option value="📊">📊 رسم بياني / لوحة تحكم</option>
+                <option value="🌐">🌐 موقع إلكتروني / قالب</option>
+                <option value="🛍️">🛍️ متجر إلكتروني</option>
+                <option value="📱">📱 تطبيق هاتف</option>
+                <option value="💻">💻 برمجيات ونظام</option>
+                <option value="📝">📝 مقال / منشور</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="prod-img">رابط صورة المعاينة (أو اتركه فارغاً لاستخدام الأيقونة):</label>
+            <input type="url" id="prod-img" placeholder="https://example.com/image.jpg">
+        </div>
+
+        <div class="form-group">
+            <label for="prod-desc">وصف المنتج ومميزاته (باختصار):</label>
+            <textarea id="prod-desc" rows="3" placeholder="اكتب نبذة مختصرة تجذب المشتري لقراءة تفاصيل المنتج الحصرية..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="prod-price">سعر المنتج ($ دولار):</label>
+            <input type="text" id="prod-price" placeholder="مثال: 9.99$">
+        </div>
+
+        <div class="form-group">
+            <label for="prod-page">اسم الصفحة المستقلة الخاصة بالمنتج (URL):</label>
+            <input type="text" id="prod-page" placeholder="مثال: product3.html">
+        </div>
+
+        <button type="button" class="submit-btn" onclick="generateProductCode()">🚀 توليد وإضافة المنتج</button>
+
+        <div id="result-area" class="result-box">
+            <p class="result-title">✅ تم توليد كود المنتج بنجاح!</p>
+            <p style="font-size: 0.85rem; margin-bottom: 10px;">انسخ الكود بالأسفل، وافتحه في ملف <b>store.html</b> وضعه داخل وسم <code style="background:#eee; padding:2px 4px; border-radius:4px;">&lt;main class="products-container"&gt;</code>:</p>
+            <div id="code-output" class="code-output"></div>
+            <button class="copy-btn" onclick="copyCode()">📋 نسخ كود المنتج</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generateProductCode() {
+        const title = document.getElementById('prod-title').value;
+        const icon = document.getElementById('prod-icon').value;
+        const img = document.getElementById('prod-img').value;
+        const desc = document.getElementById('prod-desc').value;
+        const price = document.getElementById('prod-price').value;
+        const page = document.getElementById('prod-page').value;
+
+        if(!title || !desc || !price || !page) {
+            alert("يرجى ملء جميع الحقول الأساسية لتوليد الكود بنجاح!");
+            return;
+        }
+
+        // بناء شكل الصورة أو الأيقونة بناء على إدخال الأدمن
+        let mediaHtml = `<div class="product-img" style="display:flex; align-items:center; justify-content:center; font-size:3rem;">${icon}</div>`;
+        if(img.trim() !== "") {
+            mediaHtml = `<img src="${img}" alt="${title}" class="product-img">`;
+        }
+
+        // كود الـ HTML المولد للمنتج بالتناسق مع متجرك الحالي
+        const generatedCode = `    <div class="product-card">
+        ${mediaHtml}
+        <div class="product-info">
+            <h2 class="product-title">${title}</h2>
+            <p class="product-desc">${desc}</p>
+            <div class="product-meta">
+                <span class="price">${price}</span>
+                <a href="${page}" class="view-btn">تفاصيل المنتج وشراء ←</a>
+            </div>
+        </div>
+    </div>`;
+
+        document.getElementById('code-output').innerText = generatedCode;
+        document.getElementById('result-area').style.display = 'block';
+    }
+
+    function copyCode() {
+        const codeText = document.getElementById('code-output').innerText;
+        navigator.clipboard.writeText(codeText).then(() => {
+            alert("تم نسخ الكود بنجاح! اذهب الآن لملف store.html والصقه هناك.");
+        });
+    }
+</script>
+
+</body>
+      </html>
+              
